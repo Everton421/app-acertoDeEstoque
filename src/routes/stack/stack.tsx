@@ -39,12 +39,13 @@ const Stack = createStackNavigator();
                         headerTitleStyle:{ fontWeight:"bold"}
                     }}
                     />
+                    */}
                     <Stack.Screen name="configurações" component={Configurações} 
                     options={{
                         headerTitleStyle:{ fontWeight:"bold"}
                     }}  
                     />
-                    */}
+                    
 
                 </Stack.Navigator>
         )

@@ -55,7 +55,11 @@ export const Home = ({navigation}:any) => {
  
     { "nome": "AcertoCamera",
     "icon":<MaterialCommunityIcons name="barcode-scan" size={24} color="black" />
-     }
+     },
+     { "nome":"configurações",
+      "icon":<Feather name="settings" size={24} color="black" />
+      }
+
     ];
 
   const Item = ({ value }: any) => {
