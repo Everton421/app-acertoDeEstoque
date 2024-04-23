@@ -10,6 +10,7 @@ import {  ProdutosFilialsc } from "../../screens/produtosFilialsc";
 import { ProdutosSpace } from "../../screens/produtosSpace";
 import { EnviaProduto } from "../../screens/enviaProdutos";
 import { EnviaProdutoAntigo } from "../../screens/enviaProdutos/enviaProdutosAntigo";
+import { AcertoProduto } from "../../screens/acerto/acertoProduto";
 
 
 const Stack = createStackNavigator();
@@ -20,6 +21,8 @@ const Stack = createStackNavigator();
 
                     <Stack.Screen name="home" component={Home} options={{headerShown:false}} />
                     <Stack.Screen name="AcertoCamera" component={AcertoCamera} options={{headerShown:false}} />
+                    <Stack.Screen name="acertoProduto" component={AcertoProduto} options={{headerShown:false}} />
+
 
 {/** 
                     <Stack.Screen name="enviaProdutos" component={EnviaProduto} 

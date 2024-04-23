@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Alert, Modal, TouchableOpacity, ScrollView, TouchableOpacityBase } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Modal, TouchableOpacity, ScrollView, TouchableOpacityBase, StatusBar } from 'react-native';
 import { Camera } from 'expo-camera';
 import { api } from '../../services/api';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
@@ -51,7 +51,7 @@ export default function AcertoCamera() {
         setDataRequest(valor.data);
         setProd(valor.data);
         setSaldoSistema(valor.data.estoque)
-       
+
       } catch (err) {
         console.log('erro ao buscar o produto', err);
       }finally{
@@ -93,7 +93,7 @@ export default function AcertoCamera() {
 function changeSetor(item:any) {
   return (
       <View>
-      <TouchableOpacity onPress={() => setSelectedSetor(item)} style={{ backgroundColor: '#FFF', margin: 5,  borderRadius: 5, elevation:5}}>
+      <TouchableOpacity onPress={() => setSelectedSetor(item)} style={{ backgroundColor: '#FFF', margin: 5,  borderRadius: 5, elevation:5,padding:3}}>
           <Text style={{ fontWeight: 'bold' }}>
               CODIGO: {item?.codigo}
             
@@ -147,14 +147,15 @@ function atualizaSaldo(v: any) {
     const response =  await api.post('/acerto/',prod);
 
     if(response.status ==200 ){
-      Alert.alert(response.data.ok)
+      Alert.alert(response.data.ok, `saldo ${prod.estoque}`)
       setNovoSaldo(0)
     }
 
       setScanned(false);
-      setSaldo(0)
-      
+      setSaldo(0);
+      setSelectedSetor(undefined);      
       console.log(response.data)
+    
     }catch(err) {
     console.log(err)
   }
@@ -162,6 +163,8 @@ function atualizaSaldo(v: any) {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={'#333'}/>
+
       <Camera
         style={styles.camera}
         type={Camera.Constants.Type.back}
@@ -205,7 +208,8 @@ function atualizaSaldo(v: any) {
 
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                           <Text style={{ fontSize: 15, fontWeight:'bold', color: '#42414d'}}> novo saldo {novoSaldo} </Text>
-                          <Text style={{ fontSize: 15, fontWeight:'bold', color: '#42414d'}} >saldo atual: {saldoSistema}</Text>
+                         {/** <Text style={{ fontSize: 15, fontWeight:'bold', color: '#42414d'}} >saldo atual: {saldoSistema}</Text>
+                       */}
                       </View>
 
                       <View style={{ alignItems: 'center' }}>
@@ -229,7 +233,7 @@ function atualizaSaldo(v: any) {
                   </View>
 
                   :
-                  <View style={{borderWidth:1, borderColor:'red', marginTop:5, borderRadius:6 }}>
+                  <View style={{borderWidth:1, borderColor:'#333', marginTop:5, borderRadius:6 }}>
                       <View style={{ alignItems: 'center' }} >
                           <Text>selecione um setor</Text>
                       </View>
